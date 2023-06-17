@@ -14,3 +14,9 @@ edditng mode install
 ```bash
 pip install -e .
 ```
+
+### Test
+
+```bash
+pytest
+```

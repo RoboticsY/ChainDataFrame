@@ -4,12 +4,27 @@ from __future__ import annotations
 import copy
 import pandas as pd
 
-# pandas のデータフレームをメソッドチェーンできるようにするクラス
 class ChainDF:
+    '''pandas のデータフレームをメソッドチェーンできるようにするクラス'''
 
-    # コンストラクタ
-    def __init__(self, df: pd.DataFrame):
-        self.df: pd.DataFrame = copy.deepcopy(df)
+    def __init__(self, df: pd.DataFrame, deep_copy: bool = False):
+        ''' コンストラクタ
+
+        Args
+        ----------
+        df : pd.DataFrame
+            データフレーム
+        deep_copy : bool, optional
+            データフレームをディープコピーするフラグ
+            デフォルトは False で、ディープコピーしない。
+        ----------
+        '''
+        if not isinstance(df, pd.DataFrame):
+            raise TypeError('df must be pandas.DataFrame')
+        if deep_copy:
+            self.df: pd.DataFrame = copy.deepcopy(df)
+        else:
+            self.df: pd.DataFrame = df
     
     # 指定されたカラムのうち、条件を満たす行のみを残す。
     def filter(self, column_name: str, condition: str | int | float) -> ChainDF:
