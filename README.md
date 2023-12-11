@@ -25,7 +25,7 @@ from ChainDF import ChainDF
 
 ### サンプルコード
 
-(例) 特定の列や業を抽出
+(例) 特定の列や行を抽出
 ```python
 import pandas as pd
 from ChainDF import ChainDF
