@@ -25,28 +25,31 @@ class TestChainDF:
         # 返り値の型チェック
         df_types = ChainDF(df, deep_copy=True).select(['col1'])
         assert isinstance(df_types, ChainDF)
-    
+
     def test_fileter(self):
         int_df = pd.DataFrame({
             'col1': [1, 2, 3],
             'col2': [4, 5, 6],
         })
-        filtered_int_df = ChainDF(int_df, deep_copy=True).filter('col1', 1).value()
+        filtered_int_df = ChainDF(
+            int_df, deep_copy=True).filter('col1', 1).value()
         assert filtered_int_df.equals(pd.DataFrame({'col1': [1], 'col2': [4]}))
 
         str_df = pd.DataFrame({
             'col1': ['a', 'b', 'c'],
             'col2': ['d', 'e', 'f'],
         })
-        filtered_str_df = ChainDF(str_df, deep_copy=True).filter('col1', 'a').value()
-        assert filtered_str_df.equals(pd.DataFrame({'col1': ['a'], 'col2': ['d']}))
+        filtered_str_df = ChainDF(
+            str_df, deep_copy=True).filter('col1', 'a').value()
+        assert filtered_str_df.equals(
+            pd.DataFrame({'col1': ['a'], 'col2': ['d']}))
 
         with pytest.raises(TypeError):
             ChainDF(int_df, deep_copy=True).filter(['col1'], 'a')
-        
+
         with pytest.raises(TypeError):
             ChainDF(int_df, deep_copy=True).filter('col1', ['a'])
-    
+
     def test_value(self):
         df = pd.DataFrame({
             'col1': [1, 2, 3],
@@ -69,10 +72,10 @@ class TestChainDF:
 
         with pytest.raises(TypeError):
             ChainDF(df, deep_copy=True).sum(1)
-        
+
         with pytest.raises(KeyError):
             ChainDF(df, deep_copy=True).sum('not_exist_col')
-    
+
     def test_mean(self):
         df = pd.DataFrame({
             'col1': [1, 2, 3],
@@ -86,7 +89,7 @@ class TestChainDF:
 
         with pytest.raises(TypeError):
             ChainDF(df, deep_copy=True).mean(1)
-        
+
         with pytest.raises(KeyError):
             ChainDF(df, deep_copy=True).mean('not_exist_col')
 
@@ -103,10 +106,10 @@ class TestChainDF:
 
         with pytest.raises(TypeError):
             ChainDF(df, deep_copy=True).median(1)
-        
+
         with pytest.raises(KeyError):
             ChainDF(df, deep_copy=True).median('not_exist_col')
-        
+
         df_even = pd.DataFrame({
             'col1': [1, 2, 3, 4],
             'col2': [0.1, -4, 10010, 100],
@@ -127,7 +130,7 @@ class TestChainDF:
 
         with pytest.raises(TypeError):
             ChainDF(df, deep_copy=True).max(1)
-        
+
         with pytest.raises(KeyError):
             ChainDF(df, deep_copy=True).max('not_exist_col')
 
@@ -144,7 +147,7 @@ class TestChainDF:
 
         with pytest.raises(TypeError):
             ChainDF(df, deep_copy=True).min(1)
-        
+
         with pytest.raises(KeyError):
             ChainDF(df, deep_copy=True).min('not_exist_col')
 
@@ -154,6 +157,7 @@ class TestChainDF:
             'col2': [0.1, -4, 10010],
         })
         col1_count = ChainDF(df, deep_copy=True).count('col1', 'aaa')
+        print(col1_count)
         assert col1_count == 2
 
         col1_count_zero = ChainDF(df, deep_copy=True).count('col1', 'ccc')
@@ -167,6 +171,6 @@ class TestChainDF:
 
         with pytest.raises(TypeError):
             ChainDF(df, deep_copy=True).count(1, 10)
-        
+
         with pytest.raises(KeyError):
             ChainDF(df, deep_copy=True).count('not_exist_col', 10)
