@@ -1,4 +1,5 @@
 # ChainDataFrame
+
 ChainDataFrame は、pandas DataFrame 操作の可読性を向上させるためのラッパーライブラリです。
 
 日本語を母国語とする人のうち、DataFrame のメンテナンス性が悪く、苦痛を感じている方をターゲットにしているため、ドキュメント類も極力日本語を使用します。
@@ -6,6 +7,7 @@ ChainDataFrame は、pandas DataFrame 操作の可読性を向上させるため
 ## 使い方
 
 ### インストール
+
 このリポジトリから直接インストールしてください。
 
 ```bash
@@ -13,6 +15,7 @@ pip install git+https://github.com/RoboticsY/ChainDataFrame.git
 ```
 
 ### アップデート
+
 ```bash
 pip install -U git+https://github.com/RoboticsY/ChainDataFrame.git
 ```
@@ -26,6 +29,7 @@ from ChainDF import ChainDF
 ### サンプルコード
 
 (例) 特定の列や行を抽出
+
 ```python
 import pandas as pd
 from ChainDF import ChainDF
@@ -42,6 +46,7 @@ new_df = (ChainDF(df)
 ```
 
 (例) 複数列を参照して新しい列を作成
+
 ```python
 import pandas as pd
 from ChainDF import ChainDF
@@ -70,10 +75,10 @@ print(new_df)
 '''
 ```
 
-
 ## 開発への参加について
 
 ### 基本方針
+
 原則として、このリポジトリは個人でのメンテナンスを継続する予定です。(※ソースはオープン、開発はクローズドという体制をとります。)
 
 知人のうち、このライブラリをメンテナンスしたい人がいれば個別で相談してください。
@@ -84,12 +89,20 @@ Fork などはライセンスに従って自由に行ってください。
 
 ### 開発者向けセットアップ
 
+開発用のパッケージをインストールします。
+
+```bash
+pip install -r requirements-dev.txt
+```
+
+ChainDF をインストールします。
+
 ```bash
 pip install .
 ```
 
 リアルタイムに変更を反映する場合には、 `-e` オプションを付与してください。
-    
+
 ```bash
 pip install -e .
 ```
